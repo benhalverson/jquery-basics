@@ -9,7 +9,7 @@ body{
   font-size: 30px;
 }
 
-.cube{
+.cube, .quote{
   display: inline-block;
   border: 1px solid red;
   background-color: purple;
