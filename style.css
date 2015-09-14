@@ -1,0 +1,10 @@
+body{
+  background-color: gray;
+}
+
+
+.alert{
+  border: 5px dashed red;
+  background-color: yellow;
+  font-size: 30px;
+}
