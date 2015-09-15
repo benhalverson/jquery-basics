@@ -1,11 +1,13 @@
+'use strict';
 $(function (){
 
-  var $orders = $('#orders');
-  var $name = $('#name');
-  var $drink = $('#drink');
+  let $orders = $('#orders');
+  let $name = $('#name');
+  let $drink = $('#drink');
+  const url= 'http://rest.learncode.academy/api/codinghouse/students/';
 
   // mustache template
-  var orderTemplate = "" +
+  let orderTemplate = "" +
   "<li>" +
   "<p>Name: {{name}}</p>" +
   "<p>Drink: {{drink}}</p>" +
@@ -16,7 +18,7 @@ $(function (){
   }
   $.ajax({
     type: 'GET',
-    url: 'http://rest.learncode.academy/api/learncode/friends',
+    url: url,
     success: function(orders) {
 
       $.each(orders, function(index, order){
@@ -35,7 +37,7 @@ $(function (){
     };
     $.ajax({
       type: 'POST',
-      url: 'http://rest.learncode.academy/api/learncode/friends',
+      url: url,
       data: order,
       // this way also works
       // data: {
@@ -50,12 +52,19 @@ $(function (){
       }
     });
   });
-  $('.remove').on('click', function(){
-    console.log('clicked');
+
+
+
+
+  $orders.delegate('.remove', 'click', function(){
+    var $li = $(this).closest('li');
     $.ajax({
       type: 'DELETE',
-      url: 'http://rest.learncode.academy/api/learncode/friends' + $(this).attr('data-id'),
+      url: url + $(this).attr('data-id'),
       success: function(){
+        $li.fadeOut(300, function(){
+          $(this).remove();
+        });
         console.log('delete success');
       },
       error: function(){
